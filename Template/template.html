@@ -1,0 +1,95 @@
+<link rel="stylesheet" type="text/css" href="../../_catalogs/MasterPage/CustomByNTQ/LinkList.css">
+<script language="javascript" src="../../_catalogs/MasterPage/CustomByNTQ/jquery-1.11.1.min.js"></script>
+<script language="javascript" src="../../_catalogs/MasterPage/CustomByNTQ/DuPont_JSLibrary.js"></script>
+<script language="javascript" src="../../_catalogs/MasterPage/CustomByNTQ/LinkList.js"></script>
+
+<div class="maintable" style="width:0px;height:0px;overflow:hidden;">
+    <span id="part1">
+
+        <table id="fptattachmenttable"></table>
+        <table cellpadding="0" cellspacing="0" id="fptformbuttons" style="margin-top: 7px;"></table>
+    </span>
+</div>
+<div id="workingonit" class="ms-dlgContent" role="dialog" aria-labelledby="dialogTitleSpan" tabindex="-1" style="z-index: 1505; display: block; width: 367px; height: 146px; left: 562px; top: 160.5px;">
+    <div class="ms-dlgBorder" style="width: 365px; height: 144px;">
+        <input type="button" value="Wrap focus to the end of the dialog" class="ms-accessible"><div class="ms-hidden">
+            <span id="dlgTitleBtns" class="ms-dlgTitleBtns">
+                <a id="DlgResizef84ae327-98cf-4bce-8f81-fdbdcf7c74b7" class="ms-dlgCloseBtn" title="Maximize" href="javascript:;">
+                    <span style="padding: 8px; height: 16px; width: 16px; display: inline-block">
+                        <span style="height: 16px; width: 16px; position: relative; display: inline-block; overflow: hidden;" class="s4-clust">
+                            <img src="/_layouts/15/images/fgimg.png?rev=23" alt="Maximize" style="left: -0px !important; top: -661px !important; position: absolute;" class="ms-dlgCloseBtnImg">
+                        </span>
+                    </span>
+                </a>
+            </span><h1 title="Dialog" class="ms-dlgTitleText ms-accentText ms-dlg-heading" id="dialogTitleSpan" style="width: 0px;">
+                Dialog
+            </h1>
+        </div>
+        <div class="ms-dlgFrameContainer">
+            <div style="width: 327px; height: 133px;">
+                <div style="padding: 39px 0px 30px;">
+                    <div class="ms-dlgLoadingTextDiv ms-alignCenter">
+                        <span style="padding-top: 6px; padding-right: 10px;">
+                            <img src="/_layouts/15/images/gears_anv4.gif?rev=23" title="This animation indicates the operation is in progress. Click to remove this animated image.">
+                        </span><span class="ms-core-pageTitle ms-accentText">
+                            Working
+                            on it...
+                        </span>
+                    </div>
+                    <div class="ms-textXLarge ms-alignCenter">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type="button" value="Wrap focus to the beginning of the dialog" class="ms-accessible">
+    </div>
+</div>
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        if (GetUrlKeyValue("Type") !== "1") {
+            ExecuteOrDelayUntilScriptLoaded(fptinitform, "sp.js");
+        }
+        else {
+            jQuery('#workingonit').html('').hide();
+            var tdiv = jQuery('#WebPartWPQ2');
+            tdiv.css('width', 'auto');
+            tdiv.css('height', 'auto');
+            //tdiv.css('overflow','auto')
+        }
+    });
+    fptinitform = function () {
+        ////process attachment
+        try {
+            jQuery('#idAttachmentsRow').appendTo(jQuery('#fptattachmenttable'))
+        } catch (err) { }
+
+        jQuery("span.hillbillyForm").each(function () {
+            //get the display name from the custom layout
+            internalName = jQuery(this).attr("data-internalName");
+            elem = jQuery(this);
+            //find the corresponding field from the default form and move it
+            //into the custom layout
+            jQuery("table.ms-formtable td").each(function () {
+                if (this.innerHTML.indexOf('FieldInternalName="' + internalName + '"') != -1) {
+                    jQuery(this).contents().appendTo(elem);
+                }
+            });
+        });
+
+        jQuery('table.ms-informationbar').insertBefore(jQuery('div.maintable'));
+        jQuery('table.ms-formtable').next().contents().appendTo(jQuery('#fptformbuttons'))
+        ////Custom JS here
+        ////example: show hide fields, render sections, set field read-only
+        ////Starting Custom JS here
+
+		//hide default form sharepoint
+		$("table[class='ms-formtable']").hide();
+		
+        ////Ending Custom JS here
+        jQuery('#workingonit').html('').hide();
+        var tdiv = jQuery('.maintable');
+        tdiv.css('width', 'auto');
+        tdiv.css('height', 'auto');
+        //tdiv.css('overflow','auto')
+    };
+</script>
